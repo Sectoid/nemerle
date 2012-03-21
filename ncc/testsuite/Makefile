@@ -64,7 +64,7 @@ test: test.exe $(NEM_DLLS)
 		-verify "$(VERIFY)"
 
 test.exe: test.n
-	$(EXECUTE) $(STAGE3)/ncc.exe -r:Nemerle.Compiler -out test.exe $(TESTN)
+	$(EXECUTE) $(STAGE3)/ncc.exe -r:System.Core -r:Nemerle.Compiler -out test.exe $(TESTN)
 
 Nemerle.dll:
 	cp $(STAGE3)/Nemerle.dll .
