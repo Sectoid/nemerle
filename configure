@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 #
 # Copyright (c) 2003-2005 The University of Wroclaw.
 # All rights reserved.
@@ -639,7 +639,13 @@ if test $? -lt 126; then
     echo_result found
     peverify="\""`cygpath "${netSDK}PEVerify.exe"`"\""
 else
-    echo_result "not found"
+    try_execute peverify
+    if test $? -lt 126; then
+        echo_result found
+        peverify="\"peverify\""
+    else
+        echo_result "not found"
+    fi
 fi
 
 # Step 9.

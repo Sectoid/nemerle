@@ -34,7 +34,7 @@ include ../config.mak
 ############################################################
 
 COMPILER_PATH = ../boot/
-NCC_FLAGS     = -dowarn:10006 -pedantic-lexer -def:_$(STAGE) -stats -greedy- $(NEM_FLAGS) $(ADD_FLAGS)
+NCC_FLAGS     = -dowarn:10006 -nowarn:10002 -pedantic-lexer -def:_$(STAGE) -stats -greedy- $(NEM_FLAGS) $(ADD_FLAGS)
 COMPILER      = $(COMPILER_PATH)ncc.exe
 COMPILER_DEP  = $(COMPILER_PATH)ncc.exe $(COMPILER_PATH)Nemerle.Macros.dll
 EXECUTE       = $(NET_ENGINE) $(NET_FLAGS)
@@ -48,83 +48,18 @@ NEMERLE_DLL_SRC = \
 	$(wildcard ../lib/*.n) \
 
 NEMERLE_COMPILER_DLL_SRC = \
-	CompilationOptions.n		 \
-	codedom/NemerleCodeCompiler.n	 \
-	codedom/NemerleCodeGenerator.n	 \
-	codedom/NemerleCodeProvider.n	 \
-	codedom/NemerleMemberAttributeConverter.n \
-	external/Codec.n		 \
-	external/ExternalMemberInfo/ExternalEventInfo.n	\
-	external/ExternalMemberInfo/ExternalFieldInfo.n	\
-	external/ExternalMemberInfo/ExternalMemberInfo.n	\
-	external/ExternalMemberInfo/ExternalMethodInfo.n	\
-	external/ExternalMemberInfo/ExternalPropertyInfo.n	\
-	external/ExternalType.n		\
-	external/ExternalTypeInfo/ExternalTypeInfo.n		\
-	external/ExternalTypeInfo/ExternalNemerleTypeInfo.n		\
-	external/ExternalTypeInfo/ExternalPrimitiveTypeInfo.n		\
-	external/InternalTypes.n	 \
-	external/LibraryReference.n	 \
-	external/LibraryReferenceManager.n	 \
-	external/NumericKind.n		 \
-	generation/HierarchyEmitter.n	 \
-	generation/ILEmitter.n		 \
-	generation/ImplementsWrapperMaker.n \
-	generation/DecisionTreeCompiler.n \
-	generation/Typer3.n		 \
-	generation/Typer4.n		 \
-	hierarchy/BuiltinMethod.n        \
-	hierarchy/ClassMembers.n	 \
-	hierarchy/CustomAttribute.n	 \
-	hierarchy/DelegateClassGen.n	 \
-	hierarchy/GlobalEnv.n	         \
-	hierarchy/MacroClassGen.n	 \
-	hierarchy/NamespaceTree.n	 \
-	hierarchy/ScanTypeHierarchy.n	 \
-	hierarchy/TypeBuilder.n		 \
-	hierarchy/TypeInfo.n		 \
-	hierarchy/TypesManager.n    \
-	hierarchy/XmlDump.n		 \
-	misc/AssemblyInfo.n		 \
-	misc/ExprWalker.n		 \
-	misc/PrettyPrint.n		 \
-	misc/Stats.n                     \
-	misc/ComponentsFactory.n  \
-	parsing/AST.n			 \
-	parsing/Lexer.n			 \
-	parsing/MainParser-Extensions.n  \
-	parsing/MainParser.n		 \
-	parsing/ParseTree.n		 \
-	parsing/PreParser.n		 \
-	parsing/PreParserIndent.n	 \
-	parsing/Utility.n		 \
-	passes.n			 \
-	typing/ConstantFolder.n		 \
-	typing/DecisionTreeBuilder.n     \
-	typing/ErrorMessage.n		 \
-	typing/LocalContext.n		 \
-	typing/LocalValue.n		 \
-	typing/MType.n			 \
-	typing/MacroColorizer.n		 \
-	typing/MacroRegistry.n		 \
-	typing/Macros.n			 \
-	typing/Messenger.n	         \
-	typing/OverloadPossibility.n	 \
-	typing/RestartInErrorMode.n	 \
-	typing/Solver.n			 \
-	typing/StaticTyVar.n		 \
-	typing/Subst.n			 \
-	typing/TyVar.n			 \
-	typing/TyVarEnv.n		 \
-	typing/TypedTree.n		 \
-	typing/Typer-CallTyper.n	 \
-	typing/Typer-DelayedTyping.n	 \
-	typing/Typer-OverloadSelection.n \
-	typing/Typer-PatternTyper.n	 \
-	typing/Typer.n			 \
-	typing/Typer2.n			 \
-	completion/CodeCompletionEngine.n   \
+	CompilationOptions.n \
+	passes.n \
+	$(wildcard parsing/*.n) \
+	$(wildcard codedom/*.n) \
+	$(wildcard completion/*.n) \
+	$(shell find external/ -type f -name '*.n') \
+	$(wildcard generation/*.n) \
+	$(wildcard hierarchy/*.n) \
+	$(wildcard misc/*.n) \
 	$(wildcard optimization/*.n) \
+	$(wildcard typing/*.n)
+# TODO: Add tests
 
 
 NCC_EXE_SRC       = main.n
@@ -290,7 +225,7 @@ out.$(STAGE)/Nemerle.Compiler.$(OUTF_STAGE)dll: \
 out.$(STAGE)/Nemerle.Macros.dll: $(COMPILER_DEP) out.$(STAGE)/Nemerle.$(OUTF_STAGE)dll \
 		out.$(STAGE)/Nemerle.Compiler.$(OUTF_STAGE)dll $(STDMACROS_DLL_SRC)
 	$(COMP) "[$(STAGE)]" Nemerle.Macros.dll
-	$(Q)$(RUN_COMPILER) -r System.Data -r System.Windows.Forms -target-library $(SNK_COMPILER) -out:$@ \
+	$(Q)$(RUN_COMPILER) -r:System.Core -r:System.Xml.Linq -r System.Data -r System.Windows.Forms -target-library $(SNK_COMPILER) -out:$@ \
 		-reference:out.$(STAGE)/Nemerle.$(OUTF_STAGE)dll \
 		-reference:out.$(STAGE)/Nemerle.Compiler.$(OUTF_STAGE)dll \
 		$(GENERIC_SRC) $(STDMACROS_DLL_SRC)
