@@ -52,7 +52,7 @@ INST  = @echo INSTALL $1
 ifeq ($(MSBUILD),)
 all:
 	$(Q)true
-	
+
 install:
 	$(Q)true
 else
@@ -69,7 +69,7 @@ Nemerle.MSBuild.Tasks.dll: MSBuildTask.cs # $(TOP)/ncc/out.stage3/ncc.exe
 #	$(EXECUTE) $(TOP)/ncc/out.stage3/ncc.exe $(NEM_FLAGS) -q -r:Microsoft.Build.Tasks.dll -out $@ -t:library MSBuildTask.cs
 
 sync-impl:
-	cp -f Nemerle.MSBuild.Tasks.dll ../../boot/
+	cp -f Nemerle.MSBuild.Tasks.dll ../../boot-4.0/
 
 uninstall:
 	rm -f $(DESTDIR)$(BINDIR)/Nemerle.MSBuild.Tasks.dll

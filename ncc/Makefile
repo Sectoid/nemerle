@@ -33,7 +33,7 @@ include ../config.mak
 # VARIABLES
 ############################################################
 
-COMPILER_PATH = ../boot/
+COMPILER_PATH = ../boot-4.0/
 NCC_FLAGS     = -dowarn:10006 -nowarn:10002 -pedantic-lexer -def:_$(STAGE) -stats -greedy- $(NEM_FLAGS) $(ADD_FLAGS)
 COMPILER      = $(COMPILER_PATH)ncc.exe
 COMPILER_DEP  = $(COMPILER_PATH)ncc.exe $(COMPILER_PATH)Nemerle.Macros.dll
@@ -97,7 +97,7 @@ all: stage1
 	$(Q)cd .. && $(MAKE) config.mak
 
 stage1:
-	$(Q)$(MAKE) STAGE=$@ OUTF_STAGE=$@. COMPILER_PATH=../boot/ aux-stage
+	$(Q)$(MAKE) STAGE=$@ OUTF_STAGE=$@. COMPILER_PATH=../boot-4.0/ aux-stage
 
 stage2:
 	$(Q)$(MAKE) STAGE=$@ OUTF_STAGE=$@. COMPILER_PATH=out.stage1/ aux-stage

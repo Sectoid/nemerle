@@ -79,7 +79,7 @@ Nemerle.Compiler.dll:
 test-stage1:
 	cp $(STAGE1)/Nemerle.stage1.dll .
 	cp $(STAGE1)/Nemerle.Compiler.stage1.dll .
-	$(EXECUTE) ../../boot/ncc.exe -no-stdlib -r:Nemerle.stage1 \
+	$(EXECUTE) ../../boot-4.0/ncc.exe -no-stdlib -r:Nemerle.stage1 \
 		-r:Nemerle.Compiler.stage1 -r:System -out test.exe $(TESTN)
 	$(EXECUTE) ./test.exe -s -r "$(EXECUTE)" \
 		-p "-no-stdlib -r:Nemerle.stage1 -r:System $(NEM_FLAGS) -nowarn:10003" \
@@ -90,7 +90,7 @@ test-generics:
 	cp $(STAGE1)/Nemerle.stage1.dll .
 	cp $(STAGE1)/Nemerle.Compiler.stage1.dll .
 	cp $(STAGE1)/Nemerle.Macros.dll .
-	$(EXECUTE) ../../boot/ncc.exe -no-stdlib -r:Nemerle.stage1 \
+	$(EXECUTE) ../../boot-4.0/ncc.exe -no-stdlib -r:Nemerle.stage1 \
 		-r:Nemerle.Compiler.stage1 -r:System -out test.exe $(TESTN)
 	$(EXECUTE) ./test.exe -s -r "$(EXECUTE)" \
 		-p "-no-stdlib -r:Nemerle.stage1 -r:System $(NEM_FLAGS) -nowarn:10003,649,10001" \
@@ -103,7 +103,7 @@ test-stage1.5:
 	cp $(STAGE1)/Nemerle.Compiler.stage1.dll .
 	cp $(STAGE1)/Nemerle.Macros.dll .
 	cp $(STAGE2)/Nemerle.stage2.dll .
-	$(EXECUTE) ../../boot/ncc.exe -no-stdlib -r:Nemerle.stage1 \
+	$(EXECUTE) ../../boot-4.0/ncc.exe -no-stdlib -r:Nemerle.stage1 \
 		-r:Nemerle.Compiler.stage1 -r:System -out test.exe $(TESTN)
 	$(EXECUTE) ./test.exe -s -r "$(EXECUTE)" \
 		-p "-no-stdlib -r:Nemerle.stage2 -r:System $(NEM_FLAGS) -nowarn:10003" \
@@ -114,7 +114,7 @@ test-stage2:
 	cp $(STAGE2)/Nemerle.stage2.dll .
 	cp $(STAGE2)/Nemerle.Compiler.stage2.dll .
 	cp $(STAGE2)/Nemerle.Macros.dll .
-	$(EXECUTE) ../../boot/ncc.exe -no-stdlib -r:Nemerle.stage2 \
+	$(EXECUTE) ../../boot-4.0/ncc.exe -no-stdlib -r:Nemerle.stage2 \
 		-r:Nemerle.Compiler.stage2 -r:System -out test.exe $(TESTN)
 	$(EXECUTE) ./test.exe -s -r "$(EXECUTE)" \
 		-p "-no-stdlib -r:Nemerle.stage2 -r:System $(NEM_FLAGS) -nowarn:10003" \
