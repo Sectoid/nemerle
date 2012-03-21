@@ -35,3 +35,25 @@ VsIntegration/Nemerle.VisualStudio/Templates/Projects/Web/WSWebSite/*.dll
 
 *.tmp
 snippets/peg-parser/Nemerle.Peg/_N_GeneratedSource_PegTest.n
+
+# Makefile build ignores
+ncc/out.stage1/
+ncc/out.stage2/
+ncc/out.stage3/
+config.mak
+configure.log
+nemerle.pc
+/tools/cs2n/CSharpLexer.cs
+/tools/cs2n/CSharpParser.cs
+/tools/cs2n/CSharpParserTokenTypes.cs
+/tools/cs2n/CSharpParserTokenTypes.txt
+/tools/cs2n/Nemerle.CSharp.CS.dll
+/tools/cs2n/Nemerle.CSharp.dll
+/tools/cs2n/Nemerle.dll
+/tools/cs2n/antlr.runtime.dll
+/tools/cs2n/cs2n.exe
+/tools/cs2n/error_log
+/tools/msbuild-task/Nemerle.MSBuild.Tasks.dll
+/tools/nant-task/Nemerle.NAnt.Tasks.dll
+/tools/nemerlish/Nemerle.Evaluation.dll
+/tools/nemerlish/nemish.exe
